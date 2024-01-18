@@ -36,44 +36,8 @@ class TPiece extends Piece{
   }
   
   
-
-  @override
-  void rotateLeft(List<Square> built) {
-    final x = Square.BLOCK_RECT.toVector2().x;
-    final y = Square.BLOCK_RECT.toVector2().y;
-    final basePosition = this.blocks[0].position - Vector2(offset.x * x, offset.y*y);
-    if(rotation == 0 && rotationCase(this.rotations[3], built, basePosition)){
-      rotation = 3;
-      offset = this.rotations[3][0];
-    } else if(rotation == 1 && rotationCase(this.rotations[0], built, basePosition)){
-      rotation = 0;
-      offset = this.rotations[0][0];
-    } else if(rotation == 2 && rotationCase(this.rotations[1], built, basePosition)){
-      rotation = 1;
-      offset = this.rotations[1][0];
-    } else if(rotation == 3 && rotationCase(this.rotations[2], built, basePosition)){
-      rotation = 2;
-      offset = this.rotations[2][0];
-    }
-  }
-  
-  @override
-  void rotateRight(List<Square> built) {
-    final x = Square.BLOCK_RECT.toVector2().x;
-    final y = Square.BLOCK_RECT.toVector2().y;
-    final basePosition = this.blocks[0].position - Vector2(offset.x * x, offset.y*y);
-    if(rotation == 0 && rotationCase(this.rotations[1], built, basePosition)){
-      rotation = 1;
-      offset = this.rotations[1][0];
-    }  else if(rotation == 1 && rotationCase(this.rotations[2], built, basePosition)){
-      rotation = 2;
-      offset = this.rotations[2][0];
-    } else if(rotation == 2 && rotationCase(this.rotations[3], built, basePosition)){
-      rotation = 3;
-      offset = this.rotations[3][0];
-    } else if(rotation == 3 && rotationCase(this.rotations[0], built, basePosition)){
-      rotation = 0;
-      offset = this.rotations[0][0];
-    }  
-  }
+  List<List<Vector2>> getPositions(){ return rotations;}
+  Vector2 getOffset(){return offset;}
+  void setOffset(Vector2 offset) {this.offset = offset;}
+  int getPosition(){return rotation;}
 }

@@ -38,43 +38,141 @@ class IPiece extends Piece{
   
   
 
-  @override
-  void rotateLeft(List<Square> built) {
-    final x = Square.BLOCK_RECT.toVector2().x;
-    final y = Square.BLOCK_RECT.toVector2().y;
-    final basePosition = this.blocks[0].position - Vector2(offset.x * x, offset.y*y);
-    if(rotation == 0 && rotationCase(this.rotations[3], built, basePosition)){
-      rotation = 3;
-      offset = this.rotations[3][0];
-    } else if(rotation == 1 && rotationCase(this.rotations[0], built, basePosition)){
-      rotation = 0;
-      offset = this.rotations[0][0];
-    } else if(rotation == 2 && rotationCase(this.rotations[1], built, basePosition)){
-      rotation = 1;
-      offset = this.rotations[1][0];
-    } else if(rotation == 3 && rotationCase(this.rotations[2], built, basePosition)){
-      rotation = 2;
-      offset = this.rotations[2][0];
+
+  List<List<Vector2>> getPositions(){ return rotations;}
+  Vector2 getOffset(){return offset;}
+  int getPosition(){return rotation;}
+
+
+
+  Vector2 getRotation(int from, int to, int test){
+    if(from == 0 && to == 1){
+      switch(test){
+        case 1:
+          return Vector2(0, 0);
+        case 2:
+          return Vector2(-2, 0);
+        case 3:
+          return Vector2(1, 0);
+        case 4:
+          return Vector2(-2, -1);
+        case 5:
+          return Vector2(1, 2);
+        default:
+          return Vector2(0, 0);
+      }
     }
-  }
-  
-  @override
-  void rotateRight(List<Square> built) {
-    final x = Square.BLOCK_RECT.toVector2().x;
-    final y = Square.BLOCK_RECT.toVector2().y;
-    final basePosition = this.blocks[0].position - Vector2(offset.x * x, offset.y*y);
-    if(rotation == 0 && rotationCase(this.rotations[1], built, basePosition)){
-      rotation = 1;
-      offset = this.rotations[1][0];
-    }  else if(rotation == 1 && rotationCase(this.rotations[2], built, basePosition)){
-      rotation = 2;
-      offset = this.rotations[2][0];
-    } else if(rotation == 2 && rotationCase(this.rotations[3], built, basePosition)){
-      rotation = 3;
-      offset = this.rotations[3][0];
-    } else if(rotation == 3 && rotationCase(this.rotations[0], built, basePosition)){
-      rotation = 0;
-      offset = this.rotations[0][0];
-    }  
+    if(from == 1 && to == 0){
+      switch(test){
+        case 1:
+          return Vector2(0, 0);
+        case 2:
+          return Vector2(2, 0);
+        case 3:
+          return Vector2(-1, 0);
+        case 4:
+          return Vector2(2, 1);
+        case 5:
+          return Vector2(-1, -2);
+        default:
+          return Vector2(0, 0);
+      }
+    }
+    if(from == 1 && to == 2){
+      switch(test){
+        case 1:
+          return Vector2(0, 0);
+        case 2:
+          return Vector2(-1, 0);
+        case 3:
+          return Vector2(2, 0);
+        case 4:
+          return Vector2(-1, 2);
+        case 5:
+          return Vector2(2, -1);
+        default:
+          return Vector2(0, 0);
+      }
+    }
+    if(from == 2 && to == 1){
+      switch(test){
+        case 1:
+          return Vector2(0, 0);
+        case 2:
+          return Vector2(1, 0);
+        case 3:
+          return Vector2(-2, 0);
+        case 4:
+          return Vector2(1, -2);
+        case 5:
+          return Vector2(-2, 1);
+        default:
+          return Vector2(0, 0);
+      }
+    }
+    if(from == 2 && to == 3){
+      switch(test){
+        case 1:
+          return Vector2(0, 0);
+        case 2:
+          return Vector2(2, 0);
+        case 3:
+          return Vector2(-1, 0);
+        case 4:
+          return Vector2(2, 1);
+        case 5:
+          return Vector2(-1, -2);
+        default:
+          return Vector2(0, 0);
+      }
+    }
+    if(from == 3 && to == 2){
+      switch(test){
+        case 1:
+          return Vector2(0, 0);
+        case 2:
+          return Vector2(-2, 0);
+        case 3:
+          return Vector2(1, 0);
+        case 4:
+          return Vector2(-2, -1);
+        case 5:
+          return Vector2(1, 2);
+        default:
+          return Vector2(0, 0);
+      }
+    }
+    if(from == 3 && to == 0){
+        switch(test){
+        case 1:
+          return Vector2(0, 0);
+        case 2:
+          return Vector2(1, 0);
+        case 3:
+          return Vector2(-2, 0);
+        case 4:
+          return Vector2(1, -2);
+        case 5:
+          return Vector2(-2, 1);        
+        default:
+          return Vector2(0, 0);
+      }
+    }
+    if(from == 0 && to == 3){
+      switch(test){
+        case 1:
+          return Vector2(0, 0);
+        case 2:
+          return Vector2(-1, 0);
+        case 3:
+          return Vector2(2, 0);
+        case 4:
+          return Vector2(-1, 2);
+        case 5:
+          return Vector2(2, -1);
+        default:    
+      }
+    }
+    return Vector2(0, 0);
   }
 }

@@ -8,6 +8,12 @@ class LPiece extends Piece{
 
   List<Square> blocks = [];
   Vector2 offset = Vector2(0, 1);
+  List<List<Vector2>> rotations = [
+    [Vector2(0,1),Vector2(1,1),Vector2(2,1),Vector2(2,0)],
+    [Vector2(1,0),Vector2(1,1),Vector2(1,2),Vector2(2,2)],
+    [Vector2(2,1),Vector2(1,1),Vector2(0,1),Vector2(0,2)],
+    [Vector2(1,2),Vector2(1,1),Vector2(1,0),Vector2(0,0)]
+  ];
   LPiece(Vector2 startingPosition ){
     final x = Square.BLOCK_RECT.toVector2().x;
     final y = Square.BLOCK_RECT.toVector2().y;
@@ -30,45 +36,8 @@ class LPiece extends Piece{
     return this.blocks;
   }
 
-  @override
-  void rotateLeft(List<Square> built) {
-    final x = Square.BLOCK_RECT.toVector2().x;
-    final y = Square.BLOCK_RECT.toVector2().y;
-    final basePosition = this.blocks[0].position - Vector2(offset.x * x, offset.y*y);
-    if(rotation == 0 && rotationCase([Vector2(1,2),Vector2(1,1),Vector2(1,0),Vector2(0,0)], built, basePosition)){
-      rotation = 3;
-      offset = Vector2(1,2);
-    } else if(rotation == 1 && rotationCase([Vector2(0,1),Vector2(1,1),Vector2(2,1),Vector2(2,0)], built, basePosition)){
-      rotation = 0;
-      offset = Vector2(0,1);
-    } else if(rotation == 2 && rotationCase([Vector2(1,0),Vector2(1,1),Vector2(1,2),Vector2(2,2)], built, basePosition)){
-      rotation = 1;
-      offset = Vector2(1,0);
-    } else if(rotation == 3 && rotationCase([Vector2(2,1),Vector2(1,1),Vector2(0,1),Vector2(0,2)], built, basePosition)){
-      rotation = 2;
-      offset = Vector2(2, 1);
-    }
-  }
-  
-  @override
-  void rotateRight(List<Square> built) {
-    final x = Square.BLOCK_RECT.toVector2().x;
-    final y = Square.BLOCK_RECT.toVector2().y;
-    final basePosition = this.blocks[0].position - Vector2(offset.x * x, offset.y*y);
-    if(rotation == 0 && rotationCase([Vector2(1,0),Vector2(1,1),Vector2(1,2),Vector2(2,2)], built, basePosition)){
-      rotation = 1;
-      offset = Vector2(1,0);
-    }  else if(rotation == 1 && rotationCase([Vector2(2,1),Vector2(1,1),Vector2(0,1),Vector2(0,2)], built, basePosition)){
-      rotation = 2;
-      offset = Vector2(2, 1);
-    } else if(rotation == 2 && rotationCase([Vector2(1,2),Vector2(1,1),Vector2(1,0),Vector2(0,0)], built, basePosition)){
-      rotation = 3;
-      offset = Vector2(1,2);
-    } else if(rotation == 3 && rotationCase([Vector2(0,1),Vector2(1,1),Vector2(2,1),Vector2(2,0)], built, basePosition)){
-      rotation = 0;
-      offset = Vector2(0,1);
-    }  
-  }
-
-
+List<List<Vector2>> getPositions(){ return rotations;}
+  Vector2 getOffset(){return offset;}
+  int getPosition(){return rotation;}
+  void setOffset(Vector2 offset) {this.offset = offset;}
 }

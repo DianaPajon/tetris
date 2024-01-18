@@ -61,7 +61,8 @@ class Square extends PositionComponent{
     Vector2 otherCenter = (otherPosition + otherSize)/2;
     
     return ((myCenter.x - otherCenter.x).abs() < COLLISTION_TOLERANCE) && 
-            (myCenter.y - otherCenter.y).abs() < BLOCK_RECT.toVector2().y - COLLISTION_TOLERANCE;
+            (myCenter.y - otherCenter.y).abs() < BLOCK_RECT.toVector2().y - COLLISTION_TOLERANCE &&
+            (myCenter.y < otherCenter.y);
   }
 
 static final Paint RED_PAINT = Paint()

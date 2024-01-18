@@ -39,7 +39,7 @@ class Bag{
       }
     } else {
       this.current = [Pieces.I,Pieces.L,Pieces.J,Pieces.S,Pieces.Z,Pieces.O,Pieces.T];
-      //this.current = [Pieces.I];
+      //this.current = [Pieces.S];
       this.current.shuffle(r);
       return next();
     }

@@ -11,9 +11,6 @@ class Tetris extends FlameGame with KeyboardEvents{
   void onLoad() async{
     board.position = Vector2(-100, -200);
     world.add(board);
-    final firstPiece = board.bag.next();
-    world.addAll(firstPiece.getBlocks());
-    board.fallingPiece = firstPiece;
   }
 
 
@@ -22,7 +19,8 @@ class Tetris extends FlameGame with KeyboardEvents{
     void update(double dt) {
       super.update(dt);
       time += dt;
-      if(time >= 1/board.level){
+      final divisor = (board.level/10).ceil();
+      if(time >= 1/divisor){
         time = 0;
         board.tick(world);
       }

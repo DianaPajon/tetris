@@ -8,7 +8,13 @@ class OPiece extends Piece {
 
   List<Square> blocks = [];
   Vector2 startingPosition;
-  Vector2 offset = Vector2(0, 9);
+  Vector2 offset = Vector2(1, 0);
+  List<List<Vector2>> rotations = [
+    [Vector2(1,0),Vector2(2,0),Vector2(1,1),Vector2(2,1)],
+    [Vector2(1,0),Vector2(2,0),Vector2(1,1),Vector2(2,1)],
+    [Vector2(1,0),Vector2(2,0),Vector2(1,1),Vector2(2,1)],
+    [Vector2(1,0),Vector2(2,0),Vector2(1,1),Vector2(2,1)]
+  ];
   OPiece(this.startingPosition){
     blocks = [
       Square(BlockColor.Yellow)
@@ -30,12 +36,14 @@ class OPiece extends Piece {
   
   @override
   void rotateLeft(List<Square> built) {
-    //nothing to do
+    //no hace nada
   }
   
   @override
   void rotateRight(List<Square> built) {
-    //nothing to do
+    //no hace nada
   }
-
+List<List<Vector2>> getPositions(){ return rotations;}
+  Vector2 getOffset(){return offset;}
+  int getPosition(){return rotation;}
 }
